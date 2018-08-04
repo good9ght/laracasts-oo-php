@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Pessoa {
     public $nome;
@@ -17,18 +17,18 @@ class Pessoa {
     public function setIdade($idade) {
         if($idade < 18) {
             throw new Exception('Esta pessoa não tem idade suficiente.');
-        } 
+        }
         $this->idade = $idade;
     }
-    
+
     /*
     |
-    | getters podem ser usados para mudar o retorna 
+    | getters podem ser usados para mudar o retorna
     | ao pegar o valor do atributo
     |
     */
     public function getIdade() {
-        return $this->idade * 10;
+        return $this->idade * 365;
     }
 }
 
@@ -44,4 +44,3 @@ $pessoa = new Pessoa("Victor");
 $pessoa->setIdade(25);
 
 var_dump($pessoa->getIdade());
-
