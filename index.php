@@ -1,21 +1,47 @@
 <?php 
 
-class Tarefa {
-    public $titulo;
-    public $descricao;
-    public $completa = false;
+class Pessoa {
+    public $nome;
+    public $idade;
 
-    public function __construct($titulo, $descricao) {
-        $this->titulo = $titulo;
-        $this->descricao = $descricao;
+    public function __construct($nome) {
+        $this->nome = $nome;
     }
 
-    public function completar() {
-        $this->completa = true;
+    /*
+    |
+    | setters podem ser usados para atribuir regras
+    | ao definir um atributo
+    |
+    */
+    public function setIdade($idade) {
+        if($idade < 18) {
+            throw new Exception('Esta pessoa não tem idade suficiente.');
+        } 
+        $this->idade = $idade;
+    }
+    
+    /*
+    |
+    | getters podem ser usados para mudar o retorna 
+    | ao pegar o valor do atributo
+    |
+    */
+    public function getIdade() {
+        return $this->idade * 10;
     }
 }
 
-$tarefa = new Tarefa('Este é o titulo', 'Está tarefa deve ser completa...');
-$tarefa->completar();
+$pessoa = new Pessoa("Victor");
 
-var_dump($tarefa);
+/*
+|
+| Uma exception será "jogada"
+|
+*/
+// $pessoa->setIdade(15);
+
+$pessoa->setIdade(25);
+
+var_dump($pessoa->getIdade());
+
