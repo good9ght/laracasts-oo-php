@@ -1,46 +1,44 @@
 <?php
 
-class Pessoa {
-    public $nome;
-    public $idade;
-
-    public function __construct($nome) {
-        $this->nome = $nome;
-    }
+class LightSwitch {
+    
+    /*
+    |
+    | Poderá ser acessado de qualquer lugar
+    |
+    */
+    public function on() {}
 
     /*
     |
-    | setters podem ser usados para atribuir regras
-    | ao definir um atributo
+    | Poderá ser acessado de qualquer lugar
     |
     */
-    public function setIdade($idade) {
-        if($idade < 18) {
-            throw new Exception('Esta pessoa não tem idade suficiente.');
-        }
-        $this->idade = $idade;
-    }
+    public function off() {}
 
     /*
     |
-    | getters podem ser usados para mudar o retorna
-    | ao pegar o valor do atributo
+    | Poderá ser acessado somente de dentro da classe
     |
     */
-    public function getIdade() {
-        return $this->idade * 365;
-    }
+    private function connect() {}
+
+    /*
+    |
+    | Poderá ser acessado por está classe ou por 
+    | classes que o herdarem
+    |
+    */
+    protected function activate() {}
 }
 
-$pessoa = new Pessoa("Victor");
+$lightSwitch = new LightSwitch;
 
-/*
-|
-| Uma exception será "jogada"
-|
-*/
-// $pessoa->setIdade(15);
+// Não funciona
+$lightSwitch->connect();
 
-$pessoa->setIdade(25);
+// Não funciona
+$lightSwitch->activate();
 
-var_dump($pessoa->getIdade());
+// Funciona
+$lightSwitch->on();
