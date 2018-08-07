@@ -1,44 +1,54 @@
 <?php
 
-class LightSwitch {
-    
-    /*
-    |
-    | Poderá ser acessado de qualquer lugar
-    |
-    */
-    public function on() {}
+class Person {
 
-    /*
-    |
-    | Poderá ser acessado de qualquer lugar
-    |
-    */
-    public function off() {}
+    protected $name;
 
-    /*
-    |
-    | Poderá ser acessado somente de dentro da classe
-    |
-    */
-    private function connect() {}
-
-    /*
-    |
-    | Poderá ser acessado por está classe ou por 
-    | classes que o herdarem
-    |
-    */
-    protected function activate() {}
+    public function __construct($name) {
+        $this->name = $name;
+    }
 }
 
-$lightSwitch = new LightSwitch;
+class Business {
 
-// Não funciona
-$lightSwitch->connect();
+    protected $staff;
 
-// Não funciona
-$lightSwitch->activate();
+    public function __construct(Staff $staff) {
+        $this->staff = $staff;
+    }
 
-// Funciona
-$lightSwitch->on();
+    public function hire(Person $person) {
+        $this->staff->add($person);
+    }
+
+    public function getStaffMembers() {
+        return $this->staff->members();
+    }
+
+}
+
+class Staff {
+    protected $members = [];
+
+    public function __construct($members) {
+        $this->members = $members;
+    }
+
+    public function add(Person $person) {
+        $this->members[] = $person;
+    }
+
+    public function members() {
+        return $this->members;
+    }
+}
+
+$victor = new Person("Victor");
+
+$staff = new Staff([$victor]);
+
+$business = new Business($staff);
+
+$business->hire(new Person('Jane Doe'));
+
+var_dump($staff);
