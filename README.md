@@ -1,1 +1,1 @@
-# Laracasts OOP PHP
+# Laracasts Object Oriented Programming PHP
